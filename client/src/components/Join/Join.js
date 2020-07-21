@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Label } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import './Join.css';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Join = () => {
+    let history = useHistory();
     const [userName, setUserName] = useState('');
+
+    const onKeySearch = (e) => {
+        if (e.key === "Enter") {
+            history.push(`/github?name=${userName}`);
+        }
+    }
 
     const onUserName = (e) => {
         setUserName(e.target.value);
@@ -27,7 +34,7 @@ const Join = () => {
                 <InputGroupAddon addonType="prepend">
                     <InputGroupText>@</InputGroupText>
                 </InputGroupAddon>
-                <Input onChange={onUserName} className="join__input" placeholder="username" autoComplete="off" />
+                <Input onKeyPress={onKeySearch} onChange={onUserName} className="join__input" placeholder="username" autoComplete="off" />
                 <Link to={`/github?name=${userName}`}>
                     <InputGroupAddon addonType="append">
                         <Button onClick={onSearch} size="lg" className="join__search">Search</Button>
