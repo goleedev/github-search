@@ -1,0 +1,36 @@
+/* Error Page */
+.error {
+    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    padding-top: 0%;
+}
+
+.error__msg {
+    margin-left: 0;
+}
+
+.error__msg h1 {
+    font-size: 6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #29a19c;
+    color: #222831;
+}
+
+.error__msg p {
+    font-size: 2rem;
+    padding-top: 20px;
+}
+
+.error__back {
+    position: absolute;
+    top: 10%;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.error__back svg {
+    margin-right: 10px;
+}

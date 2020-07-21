@@ -22,10 +22,17 @@ function UserDetail() {
                 <Col className="text-center">Name</Col>
             </Row>
             <Row>
-                <Col className="text-center">Followers 0</Col>
-                <Col className="text-center">Following 0</Col>
                 <Col className="text-center">
-                    <Link to="/"><GitHubIcon /></Link>
+                    <span>0</span>
+                    <span>Repository</span>
+                </Col>
+                <Col className="text-center">
+                    <span>0</span>
+                    <span>Follower</span>
+                </Col>
+                <Col className="text-center">
+                    <span>0</span>
+                    <span>Following</span>
                 </Col>
             </Row>
             <Row>
