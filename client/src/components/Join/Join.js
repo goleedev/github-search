@@ -1,0 +1,41 @@
+import React, { useState } from 'react';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Label } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
+import './Join.css';
+import GitHubIcon from '@material-ui/icons/GitHub';
+
+const Join = () => {
+    const [userName, setUserName] = useState('');
+
+    const onUserName = (e) => {
+        setUserName(e.target.value);
+    }
+    
+    const onSearch = (e) => {
+        if (!userName) {
+            e.preventDefault();
+            alert("Who do you want to look up? :/")
+        }
+    }
+
+    return (
+        <div className="join__container">
+            <GitHubIcon className="join__icon" />
+            <Label>How's Your Github?</Label>
+            <InputGroup className="join__form" size="lg">
+                <InputGroupAddon addonType="prepend">
+                    <InputGroupText>@</InputGroupText>
+                </InputGroupAddon>
+                <Input onChange={onUserName} className="join__input" placeholder="username" autoComplete="off" />
+                <Link to={`/github?name=${userName}`}>
+                    <InputGroupAddon addonType="append">
+                        <Button onClick={onSearch} size="lg" className="join__search">Search</Button>
+                    </InputGroupAddon>
+                </Link>
+            </InputGroup>
+        </div>
+    )
+}
+
+export default Join
