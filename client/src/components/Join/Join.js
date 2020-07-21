@@ -16,7 +16,7 @@ const Join = () => {
         if (!userName) {
             e.preventDefault();
             alert("Who do you want to look up? :/")
-        }
+        } 
     }
 
     return (
