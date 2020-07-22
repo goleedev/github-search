@@ -7,7 +7,7 @@ html {
 
 body {
   margin: 0;
-  background-color: #222831 !important;
+  background-color: #fff !important;
   color: #fafaf6 !important;
   font-family: 'Ubuntu Mono', monospace !important;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +16,7 @@ body {
 
 #root {
     height: 100vh;
+    background-color: #222831 !important;
 }
 
 code {
@@ -45,4 +46,9 @@ input, button, select {
     cursor: pointer;
 }
 
-  
+.loading {
+    position: relative;
+    left: 45%;
+    top: 40%;
+    width: 10%;
+}

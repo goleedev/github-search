@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { RiArrowGoBackLine } from 'react-icons/ri';
 import { Container, Row, Col } from 'reactstrap';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './Error.css';
 
 function Error() {
@@ -13,11 +14,10 @@ function Error() {
                     <p>We can't seem to find the page you're looking for</p>
                 </Col>
             </Row>
-            <Row className="error__back">
+            <Row className="error__back ">
                 <Col>
                     <Link to="/">
-                        <ArrowBackIcon />
-                        <span>Back To Home</span>
+                        <RiArrowGoBackLine /> Back To Home
                     </Link>
                 </Col>
             </Row>

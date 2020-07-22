@@ -1,44 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { GithubContext } from '../Context/Context';
+import Error from '../Error/Error';
+import Repos from '../Charts/Repos';
 
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import { MdWork, MdLocationOn } from 'react-icons/md';
+import { FaBlog, FaRegCalendarCheck } from 'react-icons/fa';
+import { RiArrowGoBackLine, RiTwitterLine } from 'react-icons/ri';
 import { Container, Row, Col } from 'reactstrap';
-import { Doughnut } from 'react-chartjs-2';
 import './UserDetail.css';
 
-function UserDetail() {
-    const [userName, setUserName] = useState('');
+const UserDetail = () => {
+    const { githubUser } = React.useContext(GithubContext);
+    const {
+        avatar_url,
+        html_url,
+        name,
+        company,
+        blog,
+        bio,
+        login,
+        location,
+        twitter_username,
+        followers,
+        following,
+        public_repos,
+        created_at
+    } = githubUser;
 
+    const userJoined = created_at.split("-");
+    const year = userJoined[0]
+    const day = userJoined[2].slice(0, 2);
+    const months = [ "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December" ];
+    const month = months[Number(userJoined[1]) - 1];
+
+    if (login === "not.loading.yet!") {
+        return <Error />
+    } 
+    
     return (
         <Container className="user__container">
-            <Link to="/">
-                <ArrowBackIcon className="user__icon" />
-            </Link>
+            <a className="user__back" href="/">
+                <RiArrowGoBackLine  /> Back To Home
+            </a>
             <Row>
-                <Col className="text-center">Img</Col>
+                <Col>
+                    <img className="user__avatar" src={avatar_url} alt="avatar" />
+                </Col>
             </Row>
             <Row>
-                <Col className="text-center">Name</Col>
+                <Col className="user__name">{name}</Col>
             </Row>
             <Row>
-                <Col className="text-center">
-                    <span>0</span>
-                    <span>Repository</span>
+                <Col className="user__des">
+                    <a className="user__username" href={html_url}>
+                        @{login} 
+                    </a>
+                    <span><FaRegCalendarCheck /> Joined | {month} {day}, {year}</span>
+                    {bio && <span> | {bio}</span>}
                 </Col>
-                <Col className="text-center">
-                    <span>0</span>
-                    <span>Follower</span>
+            </Row>
+            <Row className="user__info">
+                {location &&
+                    <Col>
+                        <MdLocationOn /> {location}
+                    </Col>}
+                {twitter_username &&
+                    <Col>
+                        <a href={`https://twitter.com/${twitter_username}`}>
+                            <RiTwitterLine /> {twitter_username}
+                        </a>    
+                    </Col>}
+                {company && <Col><MdWork /> {company}</Col>}
+                {blog &&
+                    <Col>
+                        <a href={blog}>
+                           <FaBlog /> {blog}
+                        </a>
+                    </Col>}
+            </Row>
+
+            {/* Followers/Following and Repos */}
+            <Row>
+                <Col className="user__card">
+                    <span>Repos</span>
+                    <p>{public_repos}</p>          
                 </Col>
-                <Col className="text-center">
-                    <span>0</span>
+                <Col className="user__card">
+                    <span>Followers</span>
+                    <p>{followers}</p>
+                </Col>
+                <Col className="user__card">
                     <span>Following</span>
+                    <p>{following}</p>  
                 </Col>
             </Row>
+
+            {/* Charts */}
             <Row>
-                <Col className="text-center">chart 1</Col>
-                <Col className="text-center">chart 2</Col>
-                <Col className="text-center">chart 3</Col>
+                <Repos />
             </Row>
         </Container>
     )

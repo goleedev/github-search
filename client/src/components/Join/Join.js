@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, Children } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Label } from 'reactstrap';
 import { Link, useHistory } from 'react-router-dom';
+import { GithubContext } from '../Context/Context';
 
+import { FaGithub } from 'react-icons/fa';
 import './Join.css';
-import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Join = () => {
     let history = useHistory();
     const [userName, setUserName] = useState('');
+    const { searchGithubUser } = React.useContext(
+        GithubContext
+    );
 
     const onKeySearch = (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && userName) {
             history.push(`/github?name=${userName}`);
+            searchGithubUser(userName);
         }
     }
 
@@ -23,12 +28,13 @@ const Join = () => {
         if (!userName) {
             e.preventDefault();
             alert("Who do you want to look up? :/")
-        } 
+        }
+        searchGithubUser(userName);
     }
 
     return (
         <div className="join__container">
-            <GitHubIcon className="join__icon" />
+            <FaGithub className="join__icon" />
             <Label>How's Your Github?</Label>
             <InputGroup className="join__form" size="lg">
                 <InputGroupAddon addonType="prepend">
